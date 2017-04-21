@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script>
+    angular.module("myapp", [])
+      .controller("MyController", function($scope) {
+      
+      });
+	  
+	   $scope.states = ["USA", "IND", "ENG"];
+  </script>
+</head>
+
+
+<body ng-app="myapp">
+  <div ng-controller="MyController">
+    
+    <fieldset style="width:700px;margin-left:50px;">
+<legend>Enter one or more Search Criteria( Bulding must match all buildings) </legend>
+
+<table>
+		<tr>
+		<td >
+<div> Street Address :  </td><td><input type = "register.street_Address" ng-model = "register.street_Address"size="35"></td>
+         <tr>
+               <td style="padding-left:400px;"></td>
+               
+         </tr>
+</div>
+</table>
+
+      <br>
+	  
+<div>
+<tr>
+<td> &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp  &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp </td>
+<td><input type="radio" name="sex" value="male" size="10">Begins with
+<input type="radio" name="sex" value="Female" size="10">Is</td>
+<input type="radio" name="sex" value="Female" size="10">Contains</td>
+</tr>
+
+</div>
+
+
+<div>
+        <table>
+		 <tr>
+		  <td style="padding-left:1px;">
+<div> City :  </td><td><input type = "text" ng-model = "subjectName"size="35"></td>
+         <tr>
+               <td style="padding-left:400px;"></td>
+               
+         </tr>
+</div>
+ </table>
+</div>
+      <br>
+	  
+ <div>
+<tr>
+<td> &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp  &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp </td>
+<td><input type="radio" name="sex" value="male" size="10">Begins with
+<input type="radio" name="sex" value="Female" size="10">Is</td>
+</tr>
+</div>
+
+
+<table>
+		 <tr>
+		  <td style="padding-left:1px;">
+		  
+		  
+<div> State :  </td> <td><select name="register_State" style="width: 280px;padding-left:30px;">
+         <tr>
+               <td style="padding-left:400px;"></td>
+               
+         </tr>
+</div>
+
+ </table>
+	  
+
+<table>
+		 <tr>
+		  <td style="padding-left:1px;">
+<div> ZipCode :  </td> <td><select name="register_ZipCode" style="width: 100px;padding-left:30px;">
+         <tr>
+               <td style="padding-left:400px;"></td>
+               
+         </tr>
+</div>
+
+      </table>
+	  
+	  
+<P> Specify one or more buldings types to include ::</P>
+
+<table>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Verizon Business On-Ring Buildings <td><br>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Execlude Bell Tail Buildings<td><br>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Execlude Collo-Restricted Buildings<td>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Execlude Buildings Without Electronics<td><br>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Execlude Central Offices<td><br>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Cap Buildings ( for LD Access only, Excludes VZB)<td>
+</tr>
+
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Cap Direct Program Buildings ( for Legacy VZB local service only)<td>
+</tr>
+</table>
+
+  <br>
+
+    </div>
+    
+  <br>
+  
+  &nbsp  &nbsp  &nbsp &nbsp 
+<button type="button" onclick="" style="margin-left:50px;">Submit</button> &nbsp  &nbsp  &nbsp &nbsp &nbsp &nbsp 
+<button type="button" onclick="" >Clear</button>
+
+  
+  
+  <div>
+    <br/><a href="http://www.code-sample.com/2014/11/set-default-value-in-dropdown-list-in.html" target="_blank"></a></div>
+</body>
+
+</html>
