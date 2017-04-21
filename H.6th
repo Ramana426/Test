@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script>
+    angular.module("myapp", [])
+      .controller("MyController", function($scope) {
+      
+      });
+  </script>
+</head>
+
+
+
+<body ng-app="myapp">
+  <div ng-controller="MyController">
+    
+    <fieldset style="width:900px;margin-left:50px;">
+<legend>CSALT Batch Information </legend>
+
+<table>
+		 <tr>
+		  <td style="padding-left:1px;">
+		<td>Input File Format: </td> 
+		<td>Customer: </td> <td><select id='purpose' style="width: 130px;">
+
+          
+        <option value="1">None</option>
+        <option value="2">Customer Name</option>
+        <option value="3">Customer Id</option>
+        
+</select>              
+                  
+               
+			   <td > &nbsp &nbsp&nbsp  &nbsp &nbsp&nbsp  &nbsp &nbsp&nbsp   Address:</td>
+			   
+			   
+
+
+          <td>
+        <select id='purpose' style="width: 130px;">
+
+          
+        <option value="1">None</option>
+        <option value="2">Un Parsed(Base)</option>
+        <option value="3">Un Parsed(Legacy)</option>
+        <option value="4">Parsed</option>
+		<option value="5">Addresse Id</option>
+		</td>
+</select>
+
+
+	<td style="padding-left:40px;">
+	<td >   Insert If postal valid:</td>
+	<td><input type="checkbox" name="vehicle" value="Bike"> <td><br>
+         </tr>
+		</table>
+		
+		
+		<br><br>
+<table>
+		 <tr>
+		   <td style="padding-left:45px;">
+		   <td>File Name : <td><input type="file" name="upload" id="file-select"></td></td>
+		  
+		   
+         
+
+            
+			</tr>
+		 </table>
+         <div >
+<p style="padding-left:130px";> Importanat!</h6> Excel Workbokks containing macros,multiple Worksheets.images<br> 
+Data Filters and grouping will not be processed correctley by the onestop<br>
+ Batch program Please submit a simple single excel spreed sheet according to<br>
+ This format Please don't submit Excel files with over 10000 rows.</p>
+</div>
+<p>(Optional) specify any ad hoc fileds provided in the input excel file to append to the output:<p>
+
+
+
+
+<tr>
+<td>Begining Adhoc coloumn   :</td>
+<td><select name="City" style="width: 60px;">
+<option size="30" value="-1" selected></option>
+</select></td>
+
+
+
+<td> &nbsp Ending Adhoc coloumn   :</td>
+<td><select name="City" style="width: 60px;">
+<option size="30" value="-1" selected></option>
+</select></td>
+
+	
+</fieldset>
+<br><br>
+<fieldset style="width:900px; margin-left:50px;">
+<legend>Address Validation Option</legend>
+<table>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Include Rate Center <td><br>
+<td style="padding-left:45px;" ><input type="checkbox" name="vehicle" value="Bike">Perform OnNet Determination<td>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Include Wire Center <td><br>
+<td style="padding-left:45px;"><input type="checkbox" name="vehicle" value="Bike">Include TCOMS Sales Cities<td>
+</tr>
+<tr>
+<td><input type="checkbox" name="vehicle" value="Bike">Include PASP<td>
+</tr>
+</table>
+</fieldset>
+
+      <br>
+
+ <br>
+  &nbsp  &nbsp  &nbsp &nbsp 
+<button type="button" onclick="" style="margin-left:50px;">Submit</button> &nbsp  &nbsp  &nbsp &nbsp &nbsp &nbsp 
+<button type="button" onclick="" >Clear</button>
+
+  
+  
+  <div>
+    <br/><a href="http://www.code-sample.com/2014/11/set-default-value-in-dropdown-list-in.html" target="_blank"></a></div>
+</body>
+
+</html>
