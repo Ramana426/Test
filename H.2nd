@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script>
+    angular.module("myapp", [])
+      .controller("MyController", function($scope) {
+        $scope.register = {};
+		$scope.register1 = {};
+        $scope.register.country = "Exact Address Search"; 
+        $scope.register1.countries = [{
+          id: "1",
+          name: "Exact Address Search"
+        }, {
+          id: "2",
+          name: "Search For Possible Address"
+        }, {
+          id: "3",
+          name: "Exact Customer/Address"
+        }, {
+          id: "4",
+          name: "Find Customers For Address"
+         },{
+          id: "5",
+          name: "Insert Address Into LRDS"
+         },{
+          id: "6",
+          name: "Exact Customer Search"
+         },{
+          id: "7",
+          name: "Search For possible Customer"
+         },{
+          id: "8",
+          name: "Find Address For Customer"
+         }, {
+          id: "9",
+          name: "Insert Customer Into LRDS"
+         }];
+		 
+		 $scope.register1.countries1 = [{
+          id: "11",
+          name: "Service Address (Unparsed)"
+        }, {
+          id: "22",
+          name: "Service Address (Parsed)"
+        }, {
+          id: "33",
+          name: "Address Id"
+        }, {
+          id: "44",
+          name: "Domestic rural Address"
+         }];
+		  
+		 $scope.register1.rr_hc_type = [{
+          id: "1",
+          name: "RR Rural Route"
+        }, {
+          id: "2",
+          name: "RR Highway Route"
+        }];
+	$scope.names = ["USA", "IND", "ENG"];
+    $scope.states = ["NY", "NJ", "TN"];
+      //  $scope.register.selectedOption = "Service Address (Unparsed)"
+         $scope.register.countt1 = $scope.register1.countries1[0];
+		 $scope.register.countt = $scope.register1.countries1[0].name; 
+
+       // $scope.register.countt.name = "aaa";
+	   $scope.myfunc = function() {        
+             $scope.register.countt = $scope.register.countt1.name; 
+     };
+	 $scope.mysavefunc = function() {        
+        alert("==================="+JSON.stringify($scope.register));  
+      
+     }; 	
+  
+
+      });
+	  
+	  
+  </script>
+ 
+
+   
+ 
+ 
+</head>
+
+<body ng-app="myapp">
+
+  <div ng-controller="MyController">
+  
+  
+
+<fieldset style="width:700px;margin-left:50px;">
+<legend></legend>
+
+    <div>
+	<table>
+	<tr>
+	 <td style="padding-left:28px;"></td>
+	 <td>Function:	 
+      <select ng-model="register.country"  ng-options="field.name as field.name for field in register1.countries " ></select>
+      </td>   
+	</tr><!-- country.id as country.name for country in register.countries -->
+	</table>
+    </div>
+</fieldset>
+<br>
+
+
+
+<div ng-hide=" register.country ==  'Exact Address Search' || register.country ==  'Search For Possible Address' || register.country ==  'Find Customers For Address'
+|| register.country ==  'Insert Address Into LRDS'" >
+
+<fieldset style="width:36.8%; px;margin-left:50px;">
+<legend>Customer Information</legend>
+<table>
+<tr>
+<td>   Customer Id:   : </td>  
+<td><input type="register.Cust_id" name="paddress" id="paddress" size="20"></td>
+<td>   -OR-</td>
+ 
+<td>   Customer Name:   : </td>
+<td><input type="register.cust_name" name="paddress" id="paddress" size="20"></td>
+</tr>
+</table>
+</fieldset>
+</div>
+
+<br>
+
+<div ng-hide=" register.country ==  'Exact Customer Search' || register.country ==  'Search For possible Customer' || register.country ==  'Find Address For Customer'" >
+<fieldset style="width:700px;margin-left:50px;">
+<legend>Address Information</legend>
+
+    
+	<table>
+	<tr>
+	 <td style="padding-left:28px;"></td>
+	 <td>Input Format :	 
+      <select  ng-model="register.countt1" ng-options="field.name for field in register1.countries1 " ng-change="myfunc()"></select>
+      </td>   
+	</tr>
+	</table>
+	
+	
+	
+	   <div ng-hide="register.countt ==  'Service Address (Unparsed)' || register.countt ==  'Address Id'|| register.countt ==  'Service Address (Parsed)'">
+           <table>
+		 <tr>
+		 <td style="padding-left:26px;"></td>
+		   <td>RR/HC Type :</td><td><select ng-model="register.rr_hc_type" ng-options="field.name as field.name for field in register1.rr_hc_type " style="width: 150px;padding-left:20px;">
+           </select></td>
+           <td>Route :      </td><td><input type = "text" ng-model = "register.Route"size="5"></td>                       
+           <td>  Box :      </td><td><input type = "text" ng-model = "register.Box"size="5"></td>
+         </tr>         
+        </table>
+         
+         
+      </div>
+	
+	
+	
+	
+
+	<div ng-hide="register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'">
+		<table>
+	   <tr>
+	   <td style="padding-left:58px;"></td>
+	   <td>Country :</td><td><select ng-model="register.country_name" ng-options="x for x in names">
+</select></td>
+       </tr>
+	   </table>
+      </div>
+      
+	  
+      
+		 <div ng-hide="register.countt ==  'Service Address (Unparsed)' || register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'">
+          <table>
+		 <tr>
+		   <td style="padding-left:3px;">
+		   <td>Premise Number : </td><td><input type = "register.premise_no" ng-model = "register.Premise_no"size="10"></td>
+         </tr>
+		 </table>
+      </div>
+    
+			   
+		 <div ng-hide="register.countt ==  'Service Address (Unparsed)'|| register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'" >
+          
+			<table>
+	   <tr>
+	   <td style="padding-left:25px;"></td>
+	   <td>Pre Direction :</td><td><select name="register.pre_direction" style="width: 50px;padding-left:20px;">
+                  <option size="30" value="-1" selected></option>
+                  </select></td>
+       </tr>
+	   </table>
+      </div>
+		 
+	<div ng-hide="register.countt ==  'Service Address (Unparsed)'|| register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'">
+           <table>
+		 <tr> 
+		 <td style="padding-left:31px;">
+		 <td>Street Name :</td>     
+               <td><input type = "register.streetName" ng-model = "register.Street_Name"size="31"></td>   
+         
+		 
+		 
+		 <td ng-hide="register.country ==  'Address Id'">Street Type : 
+               <td><input type = "register.street_type" ng-model = "register.Street_Type"size="10"></td>
+               </td>
+		 </table>
+		 </tr>
+      </div>
+	  
+	  <div ng-hide="register.countt ==  'Service Address (Unparsed)' || register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'"> 
+         <table>
+	   <tr>
+	   <td style="padding-left:18px;"></td>
+	   <td>Post Direction :</td><td><select name="register.post_direction" style="width: 55px;padding-left:20px;">
+                  <option size="30" value="-1" selected></option>
+                  </select></td>
+       </tr>
+	   </table>
+      </div>
+      
+	   <div ng-hide="register.countt ==  'Service Address (Unparsed)' || register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'"> 
+         <table>
+		 <tr> 
+		 <td style="padding-left:45px;">
+		 <td>Unit Type :</td> </td><td><select name="register.unit_type" style="width: 55px;padding-left:20px;">
+                  <option size="30" value="-1" selected></option>
+                  </select></td>
+		 
+	
+		 <td ng-hide="register.country ==  'Address Id'">Unit Number: 
+               <td><input type = "text" ng-model = "register.unit_no"size="6"></td>
+               </td>
+		 </table>
+         
+      </div >
+
+		 <div ng-hide="register.countt ==  'Service Address (Parsed)' || register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'">
+          <table>
+		 <tr> 
+		 <td style="padding-left:73px;">
+		 <td> Street :</td>     
+               <td><input type = "text" ng-model = "register.street1" size="31"></td>
+         </tr>
+		 </table>
+		 </div>
+		 
+		 
+		<div ng-hide="register.countt ==  'Service Address (Parsed)' || register.countt ==  'Address Id' || register.countt ==  'Domestic rural Address'"> 
+		 <table>
+		 <tr> 
+		 <td style="padding-left:60px;">
+		 <td>Street 2 :</td>     
+               <td><input type = "text" ng-model = "register.street2"size="31"></td>
+         </tr>
+		 </table>
+		 
+      </div>
+    
+    
+    
+    
+      <div ng-hide="register.countt ==  'Address Id'">
+          <table>
+		 <tr>
+		   <td style="padding-left:80px;">
+		   <td>City : </td><td><input type = "text" ng-model = "register.city"size="20"></td>
+         </tr>
+		 </table>
+      </div>
+    
+     
+      <div ng-hide="register.countt ==  'Address Id'">
+          <table>
+		 <tr>
+		  <td style="padding-left:76px;">
+		  <td>State : </td> <td>
+		  <select ng-model="register.state" ng-options="x for x in states">
+		</select>
+		
+		                      
+               <td ng-hide="register.country ==  'Address Id'"> Zip : 
+               <td><input type = "text" ng-model = "register.zip"size="10"></td>
+               </td>
+         </tr>
+		</table>
+    </div>
+      
+     
+	 
+      <div ng-hide="register.countt ==  'Service Address (Unparsed)' || register.countt ==  'Service Address (Parsed)' || register.countt ==  'Domestic rural Address'">
+          <table>
+		 <tr>
+		   <td style="padding-left:40px;">
+		   <td>Address Id : </td><td><input type = "text" ng-model = "register.add_id"size="20"></td>
+         </tr>
+		 </table>
+      </div>
+    
+    </fieldset>
+    <br>
+    
+  &nbsp  &nbsp  &nbsp &nbsp 
+<button type="button" ng-click="mysavefunc()" style="margin-left:50px;" >Submit</button> &nbsp  &nbsp  &nbsp &nbsp &nbsp &nbsp 
+<button type="button" onclick="" >Clear</button>
+	
+
+
+  </div>
+
+  
+</div >
+
+<br>
+  <div>  <br/><a href="http://www.code-sample.com/2014/11/set-default-value-in-dropdown-list-in.html" target="_blank"></a></div>
+</body>
+
+</html>
