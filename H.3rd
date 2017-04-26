@@ -7,16 +7,33 @@
   <script>
     angular.module("myapp", [])
       .controller("MyController", function($scope) {
-      
+	  $scope.commondisabled = true;
+      $scope.states = ["USA", "IND", "ENG"];
+	    $scope.checkboxDisable= function(all)
+	   {
+	   if(all){
+	    $scope.commondisabled = false;
+	   }
+	   else{
+	     $scope.commondisabled = true;
+		$scope.checkdisable=false;
+	   $scope.checkdisable=false;
+	   }
+	console.log(all);
+	   }
       });
 	  
-	   $scope.states = ["USA", "IND", "ENG"];
+	   
+	  
+	   
+	   
   </script>
 </head>
 
 
 <body ng-app="myapp">
   <div ng-controller="MyController">
+  
     
     <fieldset style="width:700px;margin-left:50px;">
 <legend>Enter one or more Search Criteria( Bulding must match all buildings) </legend>
@@ -36,10 +53,10 @@
 	  
 <div>
 <tr>
-<td> &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp  &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp </td>
-<td><input type="radio" name="sex" value="male" size="10">Begins with
-<input type="radio" name="sex" value="Female" size="10">Is</td>
-<input type="radio" name="sex" value="Female" size="10">Contains</td>
+<td style="padding-left:33px;" > &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp  &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp </td>
+<td><input type="radio"  size="10">Begins with
+<input type="radio"  size="10">Is</td>
+<input type="radio" size="10">Contains</td>
 </tr>
 
 </div>
@@ -67,22 +84,20 @@
 </tr>
 </div>
 
-
-<table>
-		 <tr>
-		  <td style="padding-left:1px;">
-		  
-		  
-<div> State :  </td> <td><select name="register_State" style="width: 280px;padding-left:30px;">
-         <tr>
-               <td style="padding-left:400px;"></td>
-               
+			<div>
+			<table>	
+			<tr>			
+			<td> State : </td> 
+			<td><select name="register_States" style="width: 280px;padding-left:30px;"></td>
+			</tr>
+			<tr>
+               <td style="padding-left:400px;"></td> 
          </tr>
 </div>
 
  </table>
-	  
 
+ 
 <table>
 		 <tr>
 		  <td style="padding-left:1px;">
@@ -94,49 +109,51 @@
 </div>
 
       </table>
-	  
-	  
+  
 <P> Specify one or more buldings types to include ::</P>
+
+
 
 <table>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Verizon Business On-Ring Buildings <td><br>
+<input type="checkbox" ng-model="all"  ng-change = "checkboxDisable(all);">verizon Bussiness On-Ring Buildings<br>
+<br>
+<tr>
+<td><input type="checkbox" ng-model="excBell" ng-checked= "checkdisable"  ng-disabled="commondisabled"  >Exclude Bell Tail Buildings<td><br>
 </tr>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Execlude Bell Tail Buildings<td><br>
+<td><input type="checkbox"  ng-checked= "checkdisable"   ng-disabled="commondisabled">Exclude Collo-Resticted Buildings<td><br>
 </tr>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Execlude Collo-Restricted Buildings<td>
+<td><input type="checkbox"   ng-checked= "checkdisable"  ng-disabled="commondisabled">Exclude Buildings Without Electronics<td><br>
 </tr>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Execlude Buildings Without Electronics<td><br>
+<td><input type="checkbox"  ng-checked= "checkdisable"  ng-disabled="commondisabled">Exclude Centrel Offices<td><br>
 </tr>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Execlude Central Offices<td><br>
+<td><input type="checkbox" ng-model="e" >Cap Buildings <td><br>
 </tr>
 <tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Cap Buildings ( for LD Access only, Excludes VZB)<td>
+<td><input type="checkbox"  ng-disabled="e" ng-checked= "checkdisable" >Cap Direct Program Buildings<td><br>
 </tr>
 
-<tr>
-<td><input type="checkbox" name="vehicle" value="Bike">Cap Direct Program Buildings ( for Legacy VZB local service only)<td>
 </tr>
 </table>
-
-  <br>
-
-    </div>
-    
-  <br>
-  
+ <br>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>   
+ </fieldset>
+  <div>
+   <br>
   &nbsp  &nbsp  &nbsp &nbsp 
 <button type="button" onclick="" style="margin-left:50px;">Submit</button> &nbsp  &nbsp  &nbsp &nbsp &nbsp &nbsp 
 <button type="button" onclick="" >Clear</button>
-
-  
-  
-  <div>
     <br/><a href="http://www.code-sample.com/2014/11/set-default-value-in-dropdown-list-in.html" target="_blank"></a></div>
 </body>
-
 </html>
