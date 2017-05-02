@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en" >
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="vendor/vzbootstrap/favicon.ico">
+      <title>VZBoostrap Angular Framework</title>
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/bootstrap.min.css">
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/vzbootstrap.min.css">
+      <link rel="stylesheet" href="dist/assets/styles/vzbsangular-styles.min.css">
+      <style type="text/css">
+         .item-1 {
+         float: left;
+         width: 750px;
+         }
+         .item-2 { 
+         float: left;
+         width: 300px;
+         }
+         .item-3 { 
+         float: left;
+         width: 300px;
+         }
+         .table-borderalign
+         {
+         padding-bottom: 10px;
+         border-bottom-color: black;
+         }
+         body {font-family: "Lato", sans-serif;}
+      </style>
+   </head>
+   <body ng-app="vzApp"  ng-controller="selectListCtrl">
+      <div class="whitepage">
+         <div class="item-1">
+            <fieldset style="width:800px">
+               <legend>Input Address </legend>
+               <form class="form-horizontal">
+                  <div class="form-group">
+                     <label class="control-label col-sm-2" for="email">Input Format :</label>
+                     <div class="col-md-4" >
+                        <div class="vzbs-dropdown" uib-dropdown is-open="status.isopen">
+						 
+                           <button id="single-button" type="button" class="btn" uib-dropdown-toggle >
+                           {{buttonLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="item in inputOptions" 
+                                 ng-click="selectItem(item)"
+                                 ng-class="{'selected' : selectedItem === item.id }">{{item.name}}</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+				  
+				  
+				
+				   <div class="form-group" ng-show="selectedItem ==  '1' || selectedItem == '2'">
+                     <label class="control-label col-sm-2" for="email">Country :</label>
+                     <div class="col-md-4" >
+					
+                        <div class="vzbs-dropdown" uib-dropdown is-open="countryStatus.isopen">
+                           <button id="single-button" type="button" class="btn" uib-dropdown-toggle >
+						   {{buttonCountryLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="country in countries" 
+                                 ng-click="selectCountry(country)"
+                                 ng-class="{'selected' : selectedCountry === country }">{{country}}</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+				  
+				    
+				   <div class="form-group" ng-show="selectedItem == '5'">
+                     <label class="control-label col-sm-2" for="rr/hc type">RR/HC Type:</label>
+                     <div class="col-sm-4">
+                        <input type="rr/hc type" class="form-control" id="rr/hc type" placeholder="Enter RR/HC Type">
+                     </div>
+					 <label class="control-label col-sm-1" for="rte">Route:</label>
+                     <div class="col-sm-2">
+                        <input type="rte" class="form-control" id="rte" placeholder="Route" >
+                     </div>
+					 <label class="control-label col-sm-1" for="box">Box:</label>
+                     <div class="col-sm-2">
+                        <input type="box" class="form-control" id="box" placeholder="Box">
+                     </div>
+                  </div>
+				  
+				  
+				 <div class="form-group" ng-show="selectedItem == '2'">
+                     <label class="control-label col-sm-2" for="pn">Premise Number:</label>
+                     <div class="col-sm-4">
+                        <input type="pn" class="form-control" id="pn" placeholder="Enter Premise Number">
+                     </div>
+                  </div>
+				  
+				   <div class="form-group" ng-show="selectedItem == '2'">
+                     <label class="control-label col-sm-2" for="pd">Pre Direction:</label>
+                     <div class="col-sm-4">
+                        <input type="pd" class="form-control" id="pd" placeholder="Enter Pre Direction">
+                     </div>
+                  </div>
+				  
+				  
+                  <div class="form-group" ng-show="selectedItem == '1'">
+                     <label class="control-label col-sm-2" for="Address Line 1">Address Line 1:</label>
+                     <div class="col-sm-4">
+                        <input type="Address Line 1" class="form-control" id="Address Line 1" placeholder="Enter Address Line 1">
+                     </div>
+                  </div>
+				  
+				   <div class="form-group" ng-show="selectedItem == '2'">
+                     <label class="control-label col-sm-2" for="sn">Street Name:</label>
+                     <div class="col-sm-4">
+                        <input type="sn" class="form-control" id="sn" placeholder="Enter street Name">
+                     </div>
+					 <label class="control-label col-sm-2" for="st">Street Type:</label>
+                     <div class="col-sm-4">
+                        <input type="st" class="form-control" id="st" placeholder="Enter Street Type ">
+                     </div>
+                  </div>
+				  
+				 <div class="form-group" ng-show="selectedItem == '2'">
+                     <label class="control-label col-sm-2" for="pd">Post Direction:</label>
+                     <div class="col-sm-4"> 
+                        <input type="pd" class="form-control" id="pd" placeholder="Enter Post Direction">
+                     </div>
+                  </div>
+				  
+				   <div class="form-group" ng-show="selectedItem == '3'">
+                     <label class="control-label col-sm-2" for="aid">Address Id:</label>
+                     <div class="col-sm-4"> 
+                        <input type="aid" class="form-control" id="aid" placeholder="Enter Address Id">
+                     </div>
+                  </div>
+				  
+				   <div class="form-group" ng-show="selectedItem == '4'">
+                     <label class="control-label col-sm-2" for="oid">Office Id:</label>
+                     <div class="col-sm-4"> 
+                        <input type="oid" class="form-control" id="oid" placeholder="Enter Office Id">
+                     </div>
+                  </div>
+				  
+				   <div class="form-group" ng-show="selectedItem ==  '2'">
+                     <label class="control-label col-sm-2" for="ut">Unit Type:</label>
+                     <div class="col-sm-4">
+                        <input type="ut" class="form-control" id="ut" placeholder="Enter Unit Type">
+                     </div>
+					 <label class="control-label col-sm-2" for="un">Unit Number:</label>
+                     <div class="col-sm-4">
+                        <input type="un" class="form-control" id="un" placeholder="Enter Unit Number">
+                     </div>
+                  </div>
+				  <div class="form-group" ng-show="selectedItem ==  '6'">
+                     <label class="control-label col-sm-2" for="ltd">Latitude:</label>
+                     <div class="col-sm-4">
+                        <input type="ltd" class="form-control" id="ltd" placeholder="Enter Latitude">
+                     </div>
+					 <label class="control-label col-sm-2" for="lotd">Longitude:</label>
+                     <div class="col-sm-4">
+                        <input type="lotd" class="form-control" id="lotd" placeholder="Enter Longitude">
+                     </div>
+                  </div>
+				  
+				  
+				  
+				   
+				  
+				  
+                  <div class="form-group" ng-show="selectedItem ==  '1' || selectedItem == '2' || selectedItem == '5' ">
+                     <label class="control-label col-sm-2" for="cty">City:</label>
+                     <div class="col-sm-4"> 
+                        <input type="City" class="form-control" id="cty" placeholder="Enter City">
+                     </div>
+                  </div>
+				   
+				  
+				   <div class="form-group"  ng-show="selectedItem ==  '1' || selectedItem == '2' || selectedItem == '5'">
+                     <label class="control-label col-sm-2" for="state">state:</label>
+                     <div class="col-md-4" >
+					
+                        <div class="vzbs-dropdown" uib-dropdown is-open="statesStatus.isopen">
+                           <button id="single-button" type="button" class="btn" uib-dropdown-toggle >
+						   {{buttonStateLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="state in states"  ng-click="selectState(state)"
+                                 ng-class="{'selected' : selectedState === state }">{{state}}</li>
+                           </ul>
+                        </div>
+                     </div>
+					  <label class="control-label col-sm-2" for="zip">Zip:</label>
+                     <div class="col-sm-4"> 
+                        <input type="Zip" class="form-control" id="zip" placeholder="Enter Zip">
+                     </div>
+                  </div>
+				 
+			
+				  
+				  
+				  
+				  <div class="form-group" ng-show="selectedItem == '7'">
+                     <label class="control-label col-sm-2" for="adr">Address:</label>
+                     <div class="col-sm-7"> 
+                        <input type="adr" class="form-control" id="adr" placeholder="Enter Address">
+                     </div>
+                  </div>
+				  
+				  
+				  <div class="form-group" ng-show="selectedItem == '8'">
+		   
+		   <label class="control-label col-sm-2" for="sta">file Name:</label>
+		   <div class="col-sm-1"> 
+                     </div>
+					 
+		   <input type="file"  ng-model = "register.file_name" name="upload" id="file-select">
+			
+				</div>
+				
+				
+				
+				
+				
+				
+				  <div class="form-group" ng-show="selectedItem ==  '1' || selectedItem == '2' || selectedItem == '3' ">
+                     <label class="control-label col-sm-2" for="sub">Sub Location:</label>
+					 <div class="col-md-2" >
+					 
+					 
+                        <div class="vzbs-dropdown" uib-dropdown is-open="ld1Status.isopen">
+                           <button id="single-button" type="button" class="btn" uib-dropdown-toggle >
+                           {{ld1buttonLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="item in ldOptions" 
+                                 ng-click="selectLd1Item(item)"
+                                 ng-class="{'selected' : selectedLd1Item === item }">{{item}}</li>
+                           </ul>
+                        </div>
+                     </div>
+					  <label class="control-label col-sm-1" for="lv1">LV1:</label>
+                     <div class="col-sm-2"> 
+                        <input type="ld1" ng-disabled="!selectedLd1Item" ng-model="lv1" class="form-control" id="ld1" >
+                     </div>
+					 
+					  <div class="col-md-2" >
+					 <div class="vzbs-dropdown" uib-dropdown is-open="ld2Status.isopen">
+                           <button id="single-button" ng-disabled="!lv1" type="button" class="btn" uib-dropdown-toggle >
+                           {{ld2buttonLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="item in ld2Options" 
+                                 ng-click="selectLd2Item(item)"
+                                 ng-class="{'selected' : selectedLd2Item === item }">{{item}}</li>
+                           </ul>
+                        </div>
+					 </div>
+					  <label class="control-label col-sm-1" for="!lv1">LV2:</label>
+                     <div class="col-sm-2"> 
+                        <input type="ld1" ng-disabled="!selectedLd2Item" ng-model="lv2" class="form-control" id="ld2" >
+                     </div>
+					 
+					 
+					 <div class="col-md-2" >
+					 <div class="vzbs-dropdown" uib-dropdown is-open="ld3Status.isopen">
+                           <button id="single-button" ng-disabled="!lv2" type="button" class="btn" uib-dropdown-toggle >
+                           {{ld3buttonLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="item in ld3Options" 
+                                 ng-click="selectLd3Item(item)"
+                                 ng-class="{'selected' : selectedLd3Item === item }">{{item}}</li>
+                           </ul>
+                        </div>
+					 </div>
+					  <label class="control-label col-sm-1" for="!lv3">LV3:</label>
+                     <div class="col-sm-2"> 
+                        <input type="ld1" ng-disabled="!selectedLd3Item" cng-model="lv3" class="form-control" id="ld3" >
+                     </div>
+					 </div>
+					 
+					 </div>
+					 
+					 
+                  </div>
+				  
+                  
+                  
+               </form>
+            </fieldset>
+	
+         </div>
+		   <div ng-hide="selectedItem ==  '8'">
+    <div class="item-2">
+	<fieldset style="width:700px; margin-left:250px;">
+<legend>Address Validation Option</legend>
+<div class="form-group">
+                     <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                           <label><input ng-model='lecValidation' type="checkbox">Perform LEC Validation </label>
+                        </div>
+                     </div>
+                  
+				
+                     <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                           <label><input ng-model='allOffice' type="checkbox">Return All Office Locations  </label>
+                        </div>
+                     </div>
+                
+				  				
+                     <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                           <label><input ng-model='lookupBuilding' type="checkbox">Lookup Building CLLI/NSC Code(s)</label>
+                        </div>
+                     </div>
+                
+				 <div class="col-sm-offset-2 col-sm-10">
+                     <div ng-show="selectedItem ==  '3' || selectedItem == '6'|| selectedItem == '7'">
+                        <div class="checkbox">
+                           <label><input ng-model='checkNearby' type="checkbox">Check for Nearby LIT/OLO Site within  </label>
+                        </div>
+                     </div>
+					 </div>
+					 
+                      
+                     <div class="col-sm-offset-2 col-sm-2" ng-hide="selectedItem ==  '1' || selectedItem == '2'  ">
+					 <div class="vzbs-dropdown" uib-dropdown is-open="meterStatus.isopen">
+						 
+                           <button id="single-button" type="button"  class="btn" uib-dropdown-toggle >
+                           {{meterLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+                              <li ng-repeat="item in meters" 
+                                 ng-click="selectMeter(item)"
+                                 ng-class="{'selected' : selectedMeter === item}">{{item}}</li>
+                           </ul>
+                        </div>
+						</div>
+              
+   <div class="tab">
+  <button class="tablinks" ng-click="opensum1()">Summary</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum2()">LEC Validation</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum3()">LIT/CAP Building</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum4()">Office Location(s)</button>
+</div>
+                     </div >
+
+
+</fieldset>
+</div>
+ </div>
+
+	  
+	
+      <script src="bower_components/angular/angular.min.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+      <script>
+         /**** Controller function for Menu toggle ****/
+         var vzApp = angular.module("vzApp", ['ngAnimate', 'ui.bootstrap']);
+         vzApp.controller('selectListCtrl', function ($scope, $log) {
+		 $scope.selectedInputOption = null;
+         $scope.buttonLabel = 'Service Address (Unparsed)';
+		 $scope.buttonCountryLabel = 'Select Item';
+		 $scope.buttonStateLabel = 'Select Item';
+		 $scope.selectedItem="1";
+		 $scope.selectedMeter="500";
+		 $scope.meterLabel="500";
+		 $scope.ld1buttonLabel="LD1"
+		 $scope.ld2buttonLabel="LD2"
+		 $scope.ld3buttonLabel="LD3"
+         $scope.items = [
+         'Fahim',
+         'Gopi',
+         'Rachel',
+         'Ronald',
+         'Lara',
+         'Louise',
+         'Cesar',
+         'Henry',
+         'Mike',
+         'Marie',
+         ];
+		 $scope.countries = ["USA", "IND", "ENG"];
+		  $scope.states = ["NY", "NJ", "TA"];
+		  $scope.meters = ["50", "100", "150","200","250", "300", "350","400","450","500"];
+		  
+		  $scope.ldOptions=["","#","AOA", "APT", "BAY"];
+		  $scope.ld2Options=["","#","AOA", "APT", "BAY"];
+		   $scope.ld3Options=["","#","AOA", "APT", "BAY"];
+		 $scope.inputOptions = [{
+          id: "1",
+          name: "Service Address (Unparsed)"
+        }, {
+          id: "2",
+          name: "Service Address (parsed)"
+        }, {
+          id: "3",
+          name: "Address Id"
+        }, {
+          id: "4",
+          name: "Office Id"
+         }, {
+          id: "5",
+          name: "Domestic Rural Address"
+         }, {
+          id: "6",
+          name: "Latitude / Longitude"
+         }, {
+          id: "7",
+          name: "Single Line Entry"
+         }, {
+          id: "8",
+          name: "Batch File"
+        }];
+         
+         $scope.status = {
+         isopen: false
+         };
+		 
+		 $scope.countryStatus = {
+         isopen: false
+         };
+		  $scope.statesStatus = {
+         isopen: false
+         };
+         
+         
+         
+         $scope.selectItem = function( item ) {
+         $scope.selectedItem = item.id;
+         $scope.buttonLabel = item.name;
+         };
+		 
+		 
+		 $scope.meterStatus = {
+         isopen: false
+         };
+         
+         
+         
+         $scope.selectMeter = function( item ) {
+         $scope.selectedMeter = item;
+         $scope.meterLabel = item;
+         };
+		 
+		 
+		 $scope.ld1Status = {
+         isopen: false
+         };
+         
+         
+         
+         $scope.selectLd1Item = function( item ) {
+         $scope.selectedLd1Item = item;
+         $scope.ld1buttonLabel = item;
+         };
+		 
+		 
+		  $scope.ld2Status = {
+         isopen: false
+         };
+         
+         
+         
+         $scope.selectLd2Item = function( item ) {
+         $scope.selectedLd2Item = item;
+         $scope.ld2buttonLabel = item;
+         };
+		 
+		 $scope.ld3Status = {
+         isopen: false
+         };
+         
+         
+         
+         $scope.selectLd3Item = function( item ) {
+         $scope.selectedLd3Item = item;
+         $scope.ld3buttonLabel = item;
+         };
+		 
+		 
+		 $scope.selectCountry = function( item ) {
+         $scope.selectedCountry = item;
+         $scope.buttonCountryLabel = item;
+         };
+		 
+		  $scope.selectState = function( item ) {
+         $scope.selectedState = item;
+         $scope.buttonStateLabel = item;
+         };
+         });
+         
+      </script>
+   </body>
+</html>
