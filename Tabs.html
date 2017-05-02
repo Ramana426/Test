@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style type="text/css">
+.item-1 {
+	float: left;
+	width: 750px;
+}
+.item-2 { 
+	float: left;
+	width: 300px;
+}
+.item-3 { 
+	float: left;
+	width: 300px;
+}
+
+.dropdown-style{
+width: 150px;
+padding-left:20px;
+border-radius:15px ;
+height: 20px;
+border:2px solid black;
+font-weight: bold;
+}
+.table-borderalign
+{
+    padding-bottom: 10px;
+  
+   border-bottom-color: black;
+}
+
+body {font-family: "Lato", sans-serif;}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+.btn {
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+</style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script>
+    angular.module("myapp", [])
+      .controller("MyController", function($scope) {
+        $scope.register = {};
+		$scope.register1 = {};
+		 $scope.submitted = 0;
+        $scope.register.country = "";
+       $scope.country_name = ["USA", "IND", "ENG"];
+        $scope.register1.countries = [{
+          id: "1",
+          name: "Service Address (Unparsed)"
+        }, {
+          id: "2",
+          name: "Service Address (parsed)"
+        }, {
+          id: "3",
+          name: "Address Id"
+        }, {
+          id: "4",
+          name: "Office Id"
+         }, {
+          id: "5",
+          name: "Domestic Rural Address"
+         }, {
+          id: "6",
+          name: "Latitude / Longitude"
+         }, {
+          id: "7",
+          name: "Single Line Entry"
+         }, {
+          id: "8",
+          name: "Batch File"
+        }];
+		
+		 $scope.register1.rr_hc_type = [{
+          id: "1",
+          name: "RR Rural Route"
+        }, {
+          id: "2",
+          name: "RR Highway Route"
+        }];
+		
+		
+		$scope.predirection = ["N", "S", "E","W","NE","NW","SE","SW"];
+		$scope.batch_names = ["I", "J", "K","L","N","M","PO","SI"];
+        $scope.sub_locs = ["AOP", "APT", "BAY"];
+        $scope.register.country = "Service Address (Unparsed)";
+		 $scope.states = ["NY", "NJ", "TN"];
+		 	 $scope.summary = 0;
+			 $scope.summary1 = 0;
+			 $scope.summary2 = 0;
+			 $scope.summary3 = 0;
+			 
+			  $scope.opensum1 = function() { 
+  
+           $scope.summary = 1;
+		   $scope.summary1 = 0;
+			 $scope.summary2 = 0;
+			 $scope.summary3 = 0;
+     }; 
+	 		  $scope.opensum2 = function() { 
+		  
+           $scope.summary = 0;
+		   $scope.summary1 = 1;
+			 $scope.summary2 = 0;
+			 $scope.summary3 = 0;
+     }; 
+	 		  $scope.opensum3 = function() {      
+		  
+           $scope.summary = 0;
+		   $scope.summary1 = 0;
+			 $scope.summary2 = 1;
+			 $scope.summary3 = 0;
+     }; 
+	 
+	 
+	 
+	 		  $scope.opensum4 = function() {  
+			  
+           $scope.summary = 0;
+		   $scope.summary1 = 0;
+			 $scope.summary2 = 0;
+			 $scope.summary3 = 1;
+     }; 
+	
+		 
+	$scope.mysavefunc = function() {
+	
+	 $scope.submitted = 1;
+       $scope.names = [
+    				{
+     				"name":"Passes VzB Validation",
+     				"value":"N"                          
+                    },
+                    {
+     				"name":"VzB LIT",
+     				"value":"N"                          
+                    },
+                    {
+     				"name":"3rd Party LIT",
+     				"value":"N"                          
+                    }
+                   ];
+         $scope.names_lea = [
+    				{
+     				"name":"Return Code",
+     				"value":"5"                          
+                    },
+                    {
+     				"name":"Return Message",
+     				"value":"Country Not Supported"                          
+                    }
+                   ];
+		$scope.names_lec = [
+    				{
+     				"name":"Return Code",
+     				"value":"5"                          
+                    },
+                    {
+     				"name":"Return Message",
+     				"value":"Country Not Supported"                          
+                    }
+                   ];
+		$scope.addressInfo = [
+    				{
+     				"label":"#",
+     				"googleParsedOutput":"First Name",
+     				"validatedOutput": "Last Name",
+					"validatedInput": "User Name"  					
+                    },
+                    {
+     				"label":"1",
+     				"googleParsedOutput":"Mark",
+     				"validatedOutput": "otto",
+					"validatedInput": "@oto" 					
+                    },
+                    {
+     				"label":"2",
+     				"googleParsedOutput":"Jacob",
+     				"validatedOutput": "Thornton",
+					"validatedInput": "@Fat" 
+                    },
+                    {
+     				"label":"3",
+     				"googleParsedOutput":"Larry",
+     				"validatedOutput": "the bird",
+					"validatedInput": "@Twitter" 					
+                    }
+                   ];
+     }; 	
+	 $scope.myclear = function() {        
+           $scope.submitted = 0;
+     }; 
+	 $scope.changefunction = function() {        
+	 
+           $scope.value_lec_display = $scope.register.value_lec_display; 
+		  ;
+     };  
+  
+ $scope.register.value_lec_display = 0;
+      });
+	  
+	  
+	
+	  
+	  
+  </script>
+</head>
+
+<body ng-app="myapp">
+  <div ng-controller="MyController">
+    <div class="item-1">
+	
+	
+    <fieldset style="width:800px;margin-left:100px;">
+<legend>Input Address </legend>
+
+    <div>
+	<table>
+	<tr>
+	 <td style="padding-left:31px;"></td>
+	 <td >Input Format :	 
+      <select ng-model="register.country" ng-selected="$first" ng-options="field.name as field.name for field in register1.countries "style="width: 250px;padding-left:20px;height: 20px;border:1px solid black;" ></select>
+      </td>   
+	</tr><!-- country.id as country.name for country in register1.countries -->
+	</table>
+    </div>
+
+
+
+ <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' 
+ ||register.country ==  'Address Id' || register.country ==  'Office Id'
+ || register.country ==  'Latitude / Longitude' || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' || register.country ==  'Batch File' " >
+        <table>
+		 <tr>
+		 <td style="padding-left:31px;"></td>
+		   <td>RR/HC Type :</td><td><select ng-model="register.rr_hc_type" ng-options="field.name as field.name for field in register1.rr_hc_type ">
+           </select></td>
+           <td>Route :      </td><td><input type = "text" ng-model = "register.route"size="5"></td>                       
+           <td>  Box :      </td><td><input type = "text" ng-model = "register.box"size="5"></td>
+         </tr>         
+        </table>
+ </div>
+ <div ng-hide="register.country == 'Address Id' || register.country == 'Address Id'  || register.country ==  'Office Id' 
+      || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'  "  >
+       
+      
+	  
+	  <table>
+	   <tr>
+	   <td style="padding-left:65px; color:black;" ></td>
+	   <td >Country :</td>
+	   <td><select ng-model="register.country_name" ng-options="x for x in country_name" >
+                 
+                  </select></td>
+       </tr>
+	   </table>
+	  
+	  
+	
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  </div>
+      
+      <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country ==  'Address Id' || register.country ==  'Office Id'
+      
+      || register.country ==  'Domestic rural Address '   || register.country ==  'Latitude / Longitude'  || register.country ==  'Single Line Entry'  
+      || register.country ==  'Batch File' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'">
+           <table>
+		 <tr>
+		   <td>
+		   <td >Premise Number : </td><td><input type = "text" ng-model = "register.premise_no" size="20"></td>
+         </tr>
+		 </table>
+      </div>
+     
+    
+     <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country ==  'Address Id' ||register.country ==  'Office Id' 
+     || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File' " >
+	 
+			<table>
+	   <tr>
+	   <td style="padding-left:28px;"></td>
+	   <td>Pre Direction :</td>
+	   <td ><select ng-model = "register.predirection"  ng-options="field for field in predirection " style="width: 50px;padding-left:20px; ">
+                  </select></td>
+       </tr>
+	   </table>
+      </div>
+    
+    <div ng-hide="register.country == 'Service Address (Unparsed)' || register.country == 'Address Id' ||register.country ==  'Office Id' 
+    || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'" >
+	
+           <table>
+		 <tr> 
+		 <td style="padding-left:30px;">
+		 <td>Street Name :</td>     
+               <td><input type = "text" ng-model = "register.street_name"size="31"></td>   
+         
+		 
+		 
+		 <td ng-hide="register.country ==  'Address Id'">Street Type : 
+               <td><input type = "text" ng-model = "register.street_type"size="10"></td>
+               </td>
+		 </table>
+		 </tr>
+         
+      </div >
+	  
+      <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country ==  'Address Id' ||register.country ==  'Office Id' 
+     || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File' " >
+			<table>
+	   <tr>
+	   <td style="padding-left:20px;"></td>
+	   <td>Post Direction :</td><td><select ng-model = "register.postdirection"  ng-options="field for field in predirection " style="width: 50px;padding-left:20px;">
+                  </select></td>
+       </tr>
+	   </table>
+      </div>
+    
+      <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country ==  'Address Id' ||register.country ==  'Office Id' 
+      || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'" >
+				 <table>
+		 <tr> 
+		 <td style="padding-left:52px;">
+		 <td>Unit Type :</td> </td><td><select name="register.unit_type" style="width: 55px;padding-left:20px;">
+                  <option size="30" value="-1" selected></option>
+                  </select></td>
+		 
+	
+		 <td ng-hide="register.country ==  'Address Id'">Unit Number: 
+               <td><input type = "text" ng-model = "register."size="6"></td>
+               </td>
+		 </table>
+		 </tr>
+         
+      </div >
+      <div  ng-hide="register.country == 'Service Address (parsed)' ||  register.country ==  'Address Id' ||register.country ==  'Office Id'
+      || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'">
+         <table>
+		 <tr> 
+		 <td style="padding-left:13px;">
+		 <td >Address Line 1 :</td>     
+               <td>
+			   <input type = "register.Address_Line1" ng-model = "register.Address_Line1"size="28"></td>
+         </tr>
+		 </table>
+      </div>
+    
+
+    
+	
+
+    
+      <div ng-hide="register.country ==  'Address Id' ||register.country ==  'Office Id' || register.country ==  'Latitude / Longitude'
+      || register.country ==  'Single Line Entry' || register.country ==  'Batch File' " >
+         <table>
+		 <tr>
+		   <td style="padding-left:91px;">
+		   <td >City : </td>
+		   <td><input type = "register.City" ng-model = "register.City"size="20"></td>
+         </tr>
+		 </table>
+      </div>
+    
+     
+      <div ng-hide="register.country ==  'Address Id' ||register.country ==  'Office Id' || register.country ==  'Latitude / Longitude' 
+      || register.country ==  'Single Line Entry' || register.country ==  'Batch File'">
+        <table>
+		 <tr>
+		  <td style="padding-left:81px;">
+		  
+		   <td >State :</td> <td>
+		   <select ng-model="register.state" ng-options="x for x in states">
+		</select>                  
+               <td ng-hide="register.country ==  'Address Id'"> Zip : 
+               <td><input type = "text" ng-model = "register.zip"size="10"></td>
+               </td>
+         </tr>
+		</table>
+    </div>
+    
+     <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' ||register.country ==  'Office Id'
+     || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' 
+     ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'" >
+          <table>
+		 <tr>
+		   <td style="padding-left:45px;">
+		   <td >Address Id : </td><td><input type = "text" ng-model = "register.add_id"size="20"></td>
+         </tr>
+		 </table>
+      </div>
+    
+    <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' ||register.country ==  'Address Id' 
+    || register.country ==  'Latitude / Longitude' || register.country ==  'Single Line Entry' 
+    ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'" >
+           <table>
+		 <tr>
+		   <td style="padding-left:61px;">
+		   <td>Office Id : </td><td><input type = "text" ng-model = "register.office_id"size="20"></td>
+         </tr>
+		 </table>
+      </div>
+    
+   
+    <div ng-hide="register.country == 'Service Address (Unparsed)' || register.country == 'Address Id' ||register.country ==  'Office Id' || register.country ==  'Address Id'
+    || register.country ==  'Single Line Entry' ||  register.country == 'Domestic Rural Address'
+    ||  register.country == 'Service Address (parsed)' || register.country ==  'Batch File'" >
+	
+	
+         <table>
+		 <tr> 
+		 <td style="padding-left:65px;">
+		 <td>Latitude :</td>     
+               <td><input type = "text" ng-model = "register.lat"size="25"></td>   
+         
+		 
+		 
+		 <td ng-hide="register.country ==  'Address Id'">Longitude : 
+               <td><input type = "text" ng-model = "register.long"size="25"></td>
+               </td>
+		 </table>
+		 </tr>
+         
+      </div >
+    
+    <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' ||register.country ==  'Address Id'
+    || register.country ==  'Latitude / Longitude' ||  register.country == 'Domestic Rural Address'
+    ||register.country ==  'Office Id' || register.country ==  'Batch File' " >
+          <table>
+		 <tr>
+		   <td style="padding-left:62px;">
+		   <td>Address : </td><td><input type = "text" ng-model = "register.address"size="45" ></td>
+         </tr>
+		 </table>
+      </div>
+    
+    <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' ||register.country ==  'Address Id'
+    || register.country ==  'Latitude / Longitude' ||  register.country == 'Domestic Rural Address' ||register.country ==  'Office Id' || register.country ==  'Single Line Entry' "   >
+	
+	<table>
+		 <tr>
+		   <td style="padding-left:50px;">
+		   <td>File Name : <td><input type="file"  ng-model = "register.file_name" name="upload" id="file-select"></td></td>
+			</tr>
+		 </table>
+         <div >
+<p style="padding-left:120px";> Importanat!</h6> Excel Workbokks containing macros,multiple Worksheets.images<br> 
+Data Filters and grouping will not be processed correctley by the onestop<br>
+ Batch program Please submit a simple single excel spreed sheet according to<br>
+ This format Please don't submit Excel files with over 10000 rows.</p>
+</div>
+<p>(Optional) specify any ad hoc fileds provided in the input excel file to append to the output:<p>
+
+<tr>
+<td>Begining Adhoc coloumn   :</td>
+<td><select ng-model="register.BAC" ng-options="x for x in batch_names">
+		</select> </td>
+<td> &nbsp Ending Adhoc coloumn   :</td>
+<td><select ng-model="register.EAC" ng-options="x for x in batch_names">
+		</select></td>
+
+      </div>
+    
+    <div ng-hide=" register.country ==  'Latitude / Longitude'  ||register.country ==  'Office Id'
+    || register.country ==  'Single Line Entry' || register.country ==  'Batch File'"  >
+      
+<table>
+<tr>
+<td style="padding-left:25px;">
+<td>Sub Location :  </td>  
+
+<td > LD1</td>
+
+<td><select ng-model="register.ld1" ng-options="x for x in sub_locs" >
+		</select> </td>
+<td>LV1:</td>
+<td><input type="text" name="register.lv1"  size="5" ></td>
+
+<td> LD2</td>
+<td><select ng-model="register.ld2" ng-options="x for x in sub_locs">
+		</select> </td>
+
+<td>LV2:</td>
+<td><input type="text" name="register.lv2"  size="5"></td>
+
+<td> LD3</td>
+<td><select ng-model="register.ld3" ng-options="x for x in sub_locs">
+		</select> </td>
+
+<td>LV3:</td>
+<td><input type="text" name="register..lv3" size="5"></td>
+</tr>
+</table>
+
+</div>
+    </fieldset>
+</div>
+      
+    <div ng-hide=" register.country ==  'Single Line Entry'|| register.country ==  'Address Id' 
+    || register.country ==  'Latitude / Longitude' || register.country ==  'Batch File'" >
+    <div class="item-2">
+	<fieldset style="width:700px; margin-left:250px;">
+<legend>Address Validation Option</legend>
+<table>
+<tr>
+<td><input type='checkbox' style='display:inline' ng-model='register.value_lec_display' ng-change="changefunction()" ng-true-value="1" ng-false-value="0">Perform LEC Validation <td><br>
+</tr>
+<tr>
+<td><input type="checkbox" >Return All Office Locations <td><br>
+</tr>
+<tr>
+<td><input type="checkbox">Lookup Building CLLI/NSC Code(s)<td>
+</tr>
+</table>
+</fieldset>
+</div>
+ </div>
+    
+ <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' || register.country == 'Office Id' 
+  ||  register.country == 'Domestic Rural Address' || register.country ==  'Batch File'">
+<div class="item-3">
+  <fieldset style="width:700px; margin-left:220px;">
+<legend>Address Validation Option</legend>
+
+
+<table>
+<tr>
+<td><input type="checkbox" >Perform LEC Validation <td><br>
+</tr>
+<tr>
+<td><input type="checkbox" >Return All Office Locations <td><br>
+</tr>
+<tr>
+<td><input type="checkbox">Lookup Building CLLI/NSC Code(s)<td>
+</tr>
+<tr>
+<td ><input type="checkbox" >Check for Nearby LIT/OLO Site within <td>
+<td><select ng-model="register.meters">
+<option value="500" selected>500</option>
+</select>:Meters</td>
+</tr>
+</table>
+</fieldset>
+</div>
+</div>
+  
+  <div ng-hide="register.country == 'Service Address (Unparsed)' ||  register.country == 'Service Address (parsed)' ||register.country ==  'Address Id'
+    || register.country ==  'Latitude / Longitude' ||  register.country == 'Domestic Rural Address' ||register.country ==  'Office Id' || register.country ==  'Single Line Entry' "  >
+<div class="item-2">
+<fieldset style="width:700px; margin-left:220px; height:100px;">
+<legend >Batch Processing Options</legend>
+<table >
+
+</table>
+</fieldset>
+</div>
+ </div> 
+  &nbsp &nbsp &nbsp &nbsp
+  <br><br>
+<div style="width:1px; margin-left:80px;">
+<div style="width:1px; margin-left:80px;">
+
+
+
+
+</div>
+  
+    <br></div>
+	
+	<div>
+<div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<button type="button" ng-click="mysavefunc()" style="margin-left:860px;" >SUBMIT</button>
+<button type="button" ng-click="myclear()" style="margin-left:80px;" >CLEAR</button>
+</div>
+  
+    <br/><a href="http://www.code-sample.com/2014/11/set-default-value-in-dropdown-list-in.html" target="_blank"></a></div>
+	<br><br>
+	
+	<div class="tab">
+  <button class="tablinks" ng-click="opensum1()">Summary</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum2()">LEC Validation</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum3()">LIT/CAP Building</button> &nbsp &nbsp
+  <button class="tablinks" ng-click="opensum4()">Office Location(s)</button>
+</div>
+
+
+
+
+
+<div ng-show = "submitted == '1' && summary == '1'">
+<table  style="width:700px; margin-left:10px; height:100px;" >
+  <tr ng-repeat="x in names">
+    <td><b>{{ x.name }} :</b></td>
+    <td><b>{{ x.value }}</b></td>
+  </tr>
+</table>
+
+
+
+
+
+
+</div>
+<div ng-show = "submitted == '1' && summary2 == '1'">
+<table  style="width:700px; margin-left:10px; height:100px;" >
+  <tr ng-repeat="x in names_lec">
+    <td><b>{{ x.name }} :</b></td>
+    <td><b>{{ x.value }}</b></td>
+  </tr>
+</table>
+
+</div>
+
+<div ng-show = "submitted == '1' && summary3 == '1'">
+ <div class="padded" md-whiteframe="2"   flex-sm="100" flex-gt-sm="100" flex-gt-md="100" layout layout-align="center center">
+    <table class= "table-borderalign">
+  <tr ng-repeat="x in addressInfo" >
+    <td class= "table-borderalign">{{ x.label}}</b></td>
+    <td>{{ x.googleParsedOutput }}</td>
+    <td>{{ x.validatedOutput }}</td>
+	 <td>{{ x.validatedInput }}</td>
+  </tr>
+  </table>
+  </div>
+
+</div>
+
+</body>
+
+</html>
+
+
