@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" >
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="vendor/vzbootstrap/favicon.ico">
+      <title>VZBoostrap Angular Framework</title>
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/bootstrap.min.css">
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/vzbootstrap.min.css">
+      <link rel="stylesheet" href="dist/assets/styles/vzbsangular-styles.min.css">
+      <style type="text/css">
+         .item-1 {
+         float: left;
+         width: 750px;
+         }
+         .item-2 { 
+         float: left;
+         width: 300px;
+         }
+         .item-3 { 
+         float: left;
+         width: 300px;
+         }
+         .table-borderalign
+         {
+         padding-bottom: 10px;
+         border-bottom-color: black;
+         }
+         body {font-family: "Lato", sans-serif;}
+		 .button-group{
+		 text-align:right;
+		 }
+      </style>
+	  
+   </head>
+   <body ng-app="vzApp"  ng-controller="selectListCtrl">
+
+      <div class="whitepage">
+      <div class="item-1">
+         <fieldset style="width:800px">
+            <legend>Ecost </legend>
+            <form class="form-horizontal">
+           
+			<div class="form-group">
+                     <label class="control-label col-sm-2">Country Code:</label>
+                     <div class="col-md-4" >
+                        <div class="vzbs-dropdown" uib-dropdown is-open="countrycodeStatus.isopen">
+                           <button id="single-button" type="button" class="btn" uib-dropdown-toggle >
+						   {{buttonCountrycodeLabel}} 
+                           <span class="vzcaret"></span>
+                           </button>
+                           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+						    <li><input type="text"  placeholder="Search.."  ng-model="startsWith" class="form-control"  autofocus ng-click="$event.stopPropagation();" ng- change ="filterSearch();" ></li>
+                              <li ng-repeat="countrycode in countrycodes | filter:startsWith"
+							  ng-click="selectCountrycode(countrycode)"    
+                                 ng-class="{'selected' : selectedCountrycode === countrycode }">{{countrycode}}</li>
+                           </ul>
+                        </div>
+                     </div>                                    
+					 
+					 
+					<label class="control-label col-sm-2">Price Type:</label>
+               <div class="col-md-4" >
+                  <div class="vzbs-dropdown" uib-dropdown is-open="pricetypeStatus.isopen">
+                     <button id="single-button" type="button"  class="btn" uib-dropdown-toggle >
+                     {{buttonPricetypeLabel}} 
+                     <span class="vzcaret"></span>
+                     </button>
+                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-class="{'adjust-block' : items.length >= 8}" >
+					  <li><input type="text"  placeholder="Search.."  ng-model="requestjson.query" class="form-control"  autofocus ng-click="$event.stopPropagation();" ng- change ="filterSearch();" ></li>
+                        <li ng-repeat="pricetype in pricetypes | filter: requestjson.query " 
+                           ng-click="selectPricetype(pricetype)"
+                           ng-class="{'selected' : selectedPricetype === pricetype }">{{pricetype}}</li>
+                     </ul>
+                  </div>
+               </div>
+                  </div>
+				  
+		
+			
+			
+		  <div class="padding-top-bottom button-group" >
+	<h4 class="col-md-12"></h4>
+	<div class="col-md-4 margin-right">
+		<button type="button" class="btn btn-primary" ng-click="mysavefunc()" ng-model="singleModel">
+			SUBMIT
+		</button>	
+	</div>
+	<div class="col-md-2 margin-bottom">
+		<button type="button" class="btn btn-default" ng-click="myclear()" ng-model="singleModel">
+			CLEAR
+		</button>	
+	</div>
+</div>
+
+      
+		  
+     
+	  </div>
+      <script src="bower_components/angular/angular.min.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+      <script>
+         /**** Controller function for Menu toggle ****/
+         var vzApp = angular.module("vzApp", ['ngAnimate', 'ui.bootstrap']);
+         vzApp.controller('selectListCtrl', function ($scope, $log) {
+		
+		 $scope.requestjson = {};
+		  $scope.requestjson.a ="asd";
+         $scope.submitted = 0;  
+		
+         $scope.selectedInputOption = null;
+      
+         $scope.buttonCountrycodeLabel = 'Select Item';
+		  $scope.buttonPricetypeLabel ='Select Item';
+		
+		 
+         $scope.items = [
+         'Fahim',
+         'Gopi',
+         'Rachel',
+         'Ronald',
+         'Lara',
+         'Louise',
+         'Cesar',
+         'Henry',
+         'Mike',
+         'Marie',
+         ];
+        
+         $scope.countrycodes = ["BRA","ss","dfg","asg"];
+		 $scope.pricetypes = ["#","AOA", "APT", "BAY"];
+		
+       
+         
+         $scope.status = {
+         isopen: false
+         };
+         
+         
+         $scope.countrycodesStatus = {
+         isopen: false
+         };
+		
+		$scope.pricetypeStatus = {
+         isopen: false
+         };
+		 
+         $scope.selectItem = function( item ) {
+		 
+		 $scope.myclear();
+         $scope.selectedItem = item.id;
+         $scope.buttonLabel = item.name;
+         };
+         
+         $scope.selectCountrycode = function( item ) {
+         $scope.requestjson.selectedCountrycode = item;
+         $scope.buttonCountrycodeLabel = item;
+         };
+		 
+		 $scope.selectPricetype = function( item ) {
+         $scope.requestjson.selectedPricetype = item;
+         $scope.buttonPricetypeLabel = item;
+         };
+		 
+		 
+		 $scope.mysavefunc = function() {	
+		 alert(JSON.stringify($scope.requestjson));
+			$scope.submitted = 1;      
+		}; 	
+		
+		 $scope.myclear = function() {        
+         $scope.submitted = 0;
+		
+		 
+         $scope.buttonCountrycodeLabel = 'Select Item';
+		 $scope.buttonPricetypeLabel= 'Select Item';
+		
+		
+        
+		 $scope.selectedCountrycode  = "";
+		$scope.buttonStateLabel = 'Select Item';
+		
+		   }; 
+         });
+         
+      </script>
+   </body>
+</html>
