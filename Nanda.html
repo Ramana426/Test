@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+Angularjs UI-Grid Filtering Example
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ui-grid.info/release/ui-grid.js"></script>
+<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+<meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="vendor/vzbootstrap/favicon.ico">
+      <title>VZBoostrap Angular Framework</title>
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/bootstrap.min.css">
+      <link rel="stylesheet" href="dist/vendor/vzbootstrap/styles/vzbootstrap.min.css">
+      <link rel="stylesheet" href="dist/assets/styles/vzbsangular-styles.min.css">
+	  
+	  
+	  <tr>
+<td>PQ Quote Id:</td>
+<td><input type="text" name="paddress" id="paddress" size="10"></td>
+<button type="button" onclick="alert('Hello world!')" style="margin-left:50px;">Go</button>
+</tr>
+	  
+	  
+	  <img src="https://cameo-sit-b.verizon.com/cameo/images/icons/16/add.png" onclick="alert('Hello world!')" 
+ width="15" height="15" align="absmiddle" style="vertical-align:middle;margin-top:0px;margin-bottom:0px;margin-left:3px;-webkit-touch-callout:none" 
+ id="isc_77" border="0" suppress="TRUE" draggable="true">
+
+<span style="display:inline-block;background-size:100% 100%;background-image:url(&quot;https://cameo-sit-b.verizon.com/cameo/cameogwt/sc/skins/Enterprise/images/ListGrid/row_collapsed.png&quot;);
+width:16px;height:16px;vertical-align:middle;margin-left:2px;margin-right:2px" eventpart="valueicon"></span>
+
+	  
+	  
+<script type="text/javascript">
+var app = angular.module("uigridApp", ["ui.grid"]);
+app.controller("uigridCtrl", function ($scope) {
+$scope.gridOptions = {
+enableFiltering: false,
+columnDefs: [
+{ field: 'TransactionId' },
+{ field: 'Cos' },
+{ field: 'Street' },
+{ field: 'City' },
+{ field: 'State' },
+{ field: 'Postal Code' },
+{ field: 'Speed' },
+{ field: 'Low bandWidth' },
+{ field: 'High bandWidth' },
+{ field: 'RateZone' },
+{ field: 'Lata' },
+{ field: 'Wire Center' }, 
+{ field: 'Neca Id' }, 
+{ field: 'location', enableFiltering: false }
+     
+],
+
+onRegisterApi: function (gridApi) {
+$scope.grid1Api = gridApi;
+}
+};
+
+
+$scope.users = [
+{ TransactionId: "2240", Cos: 10, location: 'Nagpur' },
+{ TransactionId: "3232", Cos: 30, location: 'Chennai' },
+{ CompanyCode: "3233", Cos: 29, location: 'Chennai' },
+{ CompanyCode: "3235", Cos: 25, location: 'Bangalore' },
+{ CompanyCode: "4006", Cos: 27, location: 'Vizag' }
+];
+$scope.gridOptions.data = $scope.users;
+});
+
+</script>
+<style type="text/css">
+.myGrid {
+width: 2000px;
+height: 230px;
+}
+</style>
+</head>
+<body ng-app="uigridApp">
+<h2>AngularJS UI Grid Fitering Example</h2>
+<div ng-controller="uigridCtrl">
+<div ui-grid="gridOptions" class="myGrid"></div>
+
+
+</div>
+</body>
+</html>
